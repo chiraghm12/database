@@ -1,3 +1,4 @@
 venv/
 database.json
 .pre-commit-config.yaml
+.idea/
