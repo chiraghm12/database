@@ -1,4 +1,6 @@
 import json
+
+
 def isfloat(num):
     """
     this method checks the vlue is float or not
@@ -101,6 +103,7 @@ class Database:
     class for database, insert the entry to json file or read from json file
     in this class aa functions are handled
     """
+
     # lists for column_name, types of attributes,feilds for entry values and valid for validation results
     types_of_attributes = []
     feilds = []
@@ -121,7 +124,7 @@ class Database:
             #     json.dump(Dict, fp)
             self.types_of_attributes = list(Dict.values())
         except:
-            print("Something Went Wrong..!!")
+            print('Something Went Wrong..!!')
 
     # function for validate all the values and store in database
 
@@ -135,19 +138,19 @@ class Database:
         # print(self.feilds)
         if len(Dict) == self.n:
             for i in range(self.n):
-                if self.types_of_attributes[i] == "int":
+                if self.types_of_attributes[i] == 'int':
                     if not self.feilds[i].isnumeric():
                         return False
-                elif self.types_of_attributes[i] == "float":
+                elif self.types_of_attributes[i] == 'float':
                     if not isfloat(self.feilds[i]):
                         return False
-                elif self.types_of_attributes[i] == "string":
+                elif self.types_of_attributes[i] == 'string':
                     if not is_valid_string(self.feilds[i]):
                         return False
-                elif self.types_of_attributes[i] == "date":
+                elif self.types_of_attributes[i] == 'date':
                     if not is_date(self.feilds[i]):
                         return False
-                elif self.types_of_attributes[i] == "time":
+                elif self.types_of_attributes[i] == 'time':
                     if not is_time(self.feilds[i]):
                         return False
             return True
@@ -168,12 +171,12 @@ class Database:
                 # self.full_dictionary[len(self.full_dictionary) + 1] = Dict
                 # print(self.full_dictionary)
                 # print(json_object)
-                with open("database.json", "w") as fp:
+                with open('database.json', 'w') as fp:
                     json.dump(Dict, fp)
         except:
-            print("Something Went Wrong...!!")
+            print('Something Went Wrong...!!')
         else:
-            print("Stored Successfully..!!")
+            print('Stored Successfully..!!')
 
     def get_all(self):
         """
@@ -182,7 +185,7 @@ class Database:
         """
         a = self
         print("\nFile's Full Content")
-        with open("database.json", "r") as fp:
+        with open('database.json', 'r') as fp:
             json_obj = json.load(fp)
         return json_obj
 
@@ -193,17 +196,17 @@ class Database:
         """
         a = self
         print("\nFile's One Content")
-        with open("database.json", "r") as fp:
+        with open('database.json', 'r') as fp:
             json_obj = json.load(fp)
 
         return json_obj
 
 
 # main function
-if __name__ == "__main__":
-    dict = {"id": "int", "name": "string", "date": "date", "time": "time"}
+if __name__ == '__main__':
+    dict = {'id': 'int', 'name': 'string', 'date': 'date', 'time': 'time'}
     d = Database(dict)
-    dict1 = {"id": "1", "name": "chirag", "date": "02/07/2001", "time": "13:45"}
+    dict1 = {'id': '1', 'name': 'chirag', 'date': '02/07/2001', 'time': '13:45'}
     d.insert(dict1)
     # dict2 = {"id": "2", "name": "abcd", "date": "02/04/2011", "time": "15:12"}
     # d.insert(dict2)
