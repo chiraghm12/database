@@ -165,11 +165,11 @@ class Database:
         try:
             if self.validation(Dict):
                 print(Dict)
-                self.full_dictionary[len(self.full_dictionary) + 1] = Dict
-                print(self.full_dictionary)
+                # self.full_dictionary[len(self.full_dictionary) + 1] = Dict
+                # print(self.full_dictionary)
                 # print(json_object)
                 with open("database.json", "w") as fp:
-                    json.dump(self.full_dictionary, fp)
+                    json.dump(Dict, fp)
         except:
             print("Something Went Wrong...!!")
         else:
@@ -196,8 +196,7 @@ class Database:
         with open("database.json", "r") as fp:
             json_obj = json.load(fp)
 
-        first_data = list(json_obj.values())[0]
-        return first_data
+        return json_obj
 
 
 # main function
@@ -206,9 +205,9 @@ if __name__ == "__main__":
     d = Database(dict)
     dict1 = {"id": "1", "name": "chirag", "date": "02/07/2001", "time": "13:45"}
     d.insert(dict1)
-    dict2 = {"id": "2", "name": "abcd", "date": "02/04/2011", "time": "15:12"}
-    d.insert(dict2)
-    dict3 = {"id": "3", "name": "hello", "date": "05/04/2011", "time": "18:12"}
-    d.insert(dict3)
+    # dict2 = {"id": "2", "name": "abcd", "date": "02/04/2011", "time": "15:12"}
+    # d.insert(dict2)
+    # dict3 = {"id": "3", "name": "hello", "date": "05/04/2011", "time": "18:12"}
+    # d.insert(dict3)
     print(d.get_all())
     print(d.get_one())
