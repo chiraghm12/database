@@ -207,9 +207,5 @@ if __name__ == '__main__':
     d = Database(dict)
     dict1 = {'id': '1', 'name': 'chirag', 'date': '02/07/2001', 'time': '13:45'}
     d.insert(dict1)
-    # dict2 = {"id": "2", "name": "abcd", "date": "02/04/2011", "time": "15:12"}
-    # d.insert(dict2)
-    # dict3 = {"id": "3", "name": "hello", "date": "05/04/2011", "time": "18:12"}
-    # d.insert(dict3)
     print(d.get_all())
     print(d.get_one())
