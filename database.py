@@ -198,7 +198,6 @@ class Database:
         print("\nFile's One Content")
         with open('database.json', 'r') as fp:
             json_obj = json.load(fp)
-
         return json_obj
 
 
