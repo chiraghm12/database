@@ -203,7 +203,7 @@ class Database:
         a = self
         with open('database.json', 'r') as fp:
             json_obj = json.load(fp)
-        return json_obj
+        return json_obj['1']
 
 
 # main function
@@ -218,5 +218,4 @@ if __name__ == '__main__':
     print("\nFile's Full Content")
     print(d.get_all())
     print("\nFile's One Content")
-    one_entry = d.get_one()
-    print(one_entry['1'])
+    print(d.get_one())
