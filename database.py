@@ -218,4 +218,5 @@ if __name__ == '__main__':
     print("\nFile's Full Content")
     print(d.get_all())
     print("\nFile's One Content")
-    print(d.get_one())
+    one_entry = d.get_one()
+    print(one_entry['1'])
