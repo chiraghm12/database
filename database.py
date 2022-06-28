@@ -104,39 +104,39 @@ class Database:
     in this class aa functions are handled
     """
 
-    # lists for column_name, types of attributes,feilds for entry values and valid for validation results
-    types_of_attributes = []
-    feilds = []
-    full_dictionary = {}
-    n = int(0)
-
     # constructor of class in which format of table is store in database
-    def __init__(self, Dict):
+    def __init__(self, data):
         """
         this method is constructor for Database class,
         in this method we fetch the keys of dictionary and write them into file as a first row and store
             them into one list and fetch the values of dictionary and store them into a list
-        :param Dict: Dictionary in which keys are column-name and values are their datatypes respectively
+        :param data: Dictionary in which keys are column-name and values are their datatypes respectively
         """
+        # lists for column_name, types of attributes,feilds for entry values and valid for validation results
+        self.types_of_attributes = []
+        self.feilds = []
+        self.full_dictionary = {}
+        self.n = int(0)
+        self.serial_no = int(0)
         try:
-            self.n = len(Dict)
+            self.n = len(data)
             # with open("database.json", "w") as fp:
             #     json.dump(Dict, fp)
-            self.types_of_attributes = list(Dict.values())
+            self.types_of_attributes = list(data.values())
         except:
             print('Something Went Wrong..!!')
 
     # function for validate all the values and store in database
 
-    def validation(self, Dict):
+    def validation(self, data):
         """
         this method validate the all value for its datatypes and store the true false vale in valid named list
-        :param Dict: Dictionary in which keys are column-name and values are entries(values) respectively
+        :param data: Dictionary in which keys are column-name and values are entries(values) respectively
         :return: return nothing and validation results stored the valid named list
         """
-        self.feilds = list(Dict.values())
+        self.feilds = list(data.values())
         # print(self.feilds)
-        if len(Dict) == self.n:
+        if len(data) == self.n:
             for i in range(self.n):
                 if self.types_of_attributes[i] == 'int':
                     if not self.feilds[i].isnumeric():
@@ -157,22 +157,29 @@ class Database:
         else:
             return False
 
-    def insert(self, Dict):
+    def insert(self, data):
         """
         this method insert the entry to the database
         if all constraints are satisfies then entry is stored in database file otherwise throw the exception
-        :param Dict: Dictionary in which keys are column-name and values are entries(values) respectively
+        :param data: Dictionary in which keys are column-name and values are entries(values) respectively
         :return: this is method not return true or false, in this method all constraints are satiesfies then
         entry stored in database otherwise raise exception
         """
         try:
-            if self.validation(Dict):
-                print(Dict)
+            if self.validation(data):
+                print(data)
+                if self.serial_no == 0:
+                    all_data = {self.serial_no + 1: data}
+                else:
+                    all_data = self.get_all()
+                    print('all Data LEn : ',len(all_data))
+                    all_data[self.serial_no+1] = data
                 # self.full_dictionary[len(self.full_dictionary) + 1] = Dict
                 # print(self.full_dictionary)
                 # print(json_object)
                 with open('database.json', 'w') as fp:
-                    json.dump(Dict, fp)
+                    json.dump(all_data, fp)
+                self.serial_no = self.serial_no + 1
         except:
             print('Something Went Wrong...!!')
         else:
@@ -184,7 +191,6 @@ class Database:
         :return: return json object which have all data of the jason file
         """
         a = self
-        print("\nFile's Full Content")
         with open('database.json', 'r') as fp:
             json_obj = json.load(fp)
         return json_obj
@@ -195,7 +201,6 @@ class Database:
         :return: json object which have first data entry of the database
         """
         a = self
-        print("\nFile's One Content")
         with open('database.json', 'r') as fp:
             json_obj = json.load(fp)
         return json_obj
@@ -203,9 +208,14 @@ class Database:
 
 # main function
 if __name__ == '__main__':
-    dict = {'id': 'int', 'name': 'string', 'date': 'date', 'time': 'time'}
-    d = Database(dict)
-    dict1 = {'id': '1', 'name': 'chirag', 'date': '02/07/2001', 'time': '13:45'}
-    d.insert(dict1)
+    index = {'id': 'int', 'name': 'string', 'date': 'date', 'time': 'time'}
+    d = Database(index)
+    data1 = {'id': '1', 'name': 'chirag', 'date': '02/07/2001', 'time': '13:45'}
+    d.insert(data1)
+    data2 = {'id': '1', 'name': 'chirag', 'date': '02/07/2001', 'time': '13:45'}
+    d.insert(data2)
+
+    print("\nFile's Full Content")
     print(d.get_all())
+    print("\nFile's One Content")
     print(d.get_one())
