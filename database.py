@@ -212,7 +212,7 @@ if __name__ == '__main__':
     d = Database(index)
     data1 = {'id': '1', 'name': 'chirag', 'date': '02/07/2001', 'time': '13:45'}
     d.insert(data1)
-    data2 = {'id': '1', 'name': 'chirag', 'date': '02/07/2001', 'time': '13:45'}
+    data2 = {'id': '2', 'name': 'rohan', 'date': '04/05/2003', 'time': '16:24'}
     d.insert(data2)
 
     print("\nFile's Full Content")
